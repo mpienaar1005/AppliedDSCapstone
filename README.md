@@ -8,7 +8,8 @@ jupyter-labs-spacex-data-collection-api.ipynb\
 jupyter-labs-webscraping.ipynb\
 labs-jupyter-spacex-Data wrangling.ipynb
 ### Module 2
-jupyter-labs-eda-sql-coursera_sqllite.ipynb
+Note due to a save error the program code in jupyter-labs-eda-sql-coursera_sqllite.ipynb is empty\
+Alternatively, a text file containing all the sql code was saved in jupyter-labs-eda-sql-coursera_sqllite.txt
 ### Module 3
 lab_jupyter_launch_site_location.ipynb
 ### Module 4
