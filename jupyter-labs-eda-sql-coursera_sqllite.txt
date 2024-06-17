@@ -1,0 +1,81 @@
+# Task 1
+%%sql
+select distinct Launch_Site
+from SPACEXTABLE
+# Task 2
+%%sql
+select * 
+from SPACEXTABLE
+where Launch_Site like 'CCA%'
+limit 5
+#Task 3
+%%sql
+select sum(PAYLOAD_MASS__KG_) as total_mass
+from SPACEXTABLE 
+where Customer like '%NASA (CRS)%'
+#Task 4
+%%sql
+select avg(PAYLOAD_MASS__KG_) as avg_mass
+from SPACEXTABLE 
+where Booster_Version like '%F9 v1.1'
+# Task 5
+%%sql
+select min(date) as FirstSuccess
+from SPACEXTABLE
+where Landing_Outcome = 'Success (ground pad)'
+# Task 6
+%%sql
+select Booster_Version
+from SPACEXTABLE
+where Landing_Outcome = 'Success (drone ship)' and PAYLOAD_MASS__KG_ between 4000 and 6000
+#Task 7
+%%sql
+select 
+sum(case when Mission_Outcome like '%Success%' then 1 else 0 end) as Success,
+sum(case when not(Mission_Outcome like '%Success%') then 1 else 0 end) as failure
+from SPACEXTABLE
+#Task 8
+%%sql
+select Booster_Version
+from SPACEXTABLE
+where PAYLOAD_MASS__KG_ = (select max(PAYLOAD_MASS__KG_) from SPACEXTABLE)
+#Task 9
+%%sql
+SELECT 
+    CASE 
+        WHEN substr(Date, 6, 2) = '01' THEN 'January'
+        WHEN substr(Date, 6, 2) = '02' THEN 'February'
+        WHEN substr(Date, 6, 2) = '03' THEN 'March'
+        WHEN substr(Date, 6, 2) = '04' THEN 'April'
+        WHEN substr(Date, 6, 2) = '05' THEN 'May'
+        WHEN substr(Date, 6, 2) = '06' THEN 'June'
+        WHEN substr(Date, 6, 2) = '07' THEN 'July'
+        WHEN substr(Date, 6, 2) = '08' THEN 'August'
+        WHEN substr(Date, 6, 2) = '09' THEN 'September'
+        WHEN substr(Date, 6, 2) = '10' THEN 'October'
+        WHEN substr(Date, 6, 2) = '11' THEN 'November'
+        WHEN substr(Date, 6, 2) = '12' THEN 'December'
+    END AS Month,
+    landing_outcome,
+    booster_version,
+    launch_site
+FROM 
+    SPACEXTABLE
+WHERE 
+    substr(Date, 0, 5) = '2015' AND
+    landing_outcome LIKE '%Failure (drone ship)%';
+# Task 10
+%%sql
+SELECT 
+    landing_outcome,
+    COUNT(landing_outcome) AS outcome_count
+FROM 
+    SPACEXTABLE
+WHERE 
+    Date BETWEEN '2010-06-04' AND '2017-03-20'
+GROUP BY 
+    landing_outcome
+ORDER BY 
+    outcome_count DESC
+
+
